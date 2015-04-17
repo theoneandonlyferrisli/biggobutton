@@ -1,17 +1,36 @@
 package hello.radek.washington.edu.biggobutton;
 
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
+    private int numPushes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        numPushes = 0;
+
+        final Button bigGoButton = (Button) findViewById(R.id.button);
+        bigGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numPushes++;
+                String pushedText = "You have pushed me " + numPushes;
+                if (numPushes > 1)
+                    pushedText += " times!";
+                else
+                    pushedText += " time!";
+                bigGoButton.setText(pushedText);
+            }
+        });
     }
 
 
